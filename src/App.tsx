@@ -6,7 +6,7 @@ import PrivateRoute from "./utils/router/privateRoute";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
