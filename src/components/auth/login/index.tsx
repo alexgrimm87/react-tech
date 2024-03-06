@@ -3,7 +3,7 @@ import {Button, TextField, Typography} from "@mui/material";
 import {IPropsLogin} from "../../../common/types/auth";
 
 const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
-  const {setPassword, setEmail} = props;
+  const {setPassword, setEmail, navigate} = props;
 
   return (
     <>
@@ -50,7 +50,7 @@ const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         variant="body1"
         sx={{fontFamily: 'Poppins'}}
       >
-        You don't have an account? <span className="incitingText">Registration</span>
+        You don't have an account? <span className="incitingText" onClick={() => navigate('/register')}>Registration</span>
       </Typography>
     </>
   );
