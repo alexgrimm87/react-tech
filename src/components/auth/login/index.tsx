@@ -1,6 +1,10 @@
+import {FC} from "react";
 import {Button, TextField, Typography} from "@mui/material";
+import {IPropsLogin} from "../../../common/types/auth";
 
-const LoginPage = () => {
+const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
+  const {setPassword, setEmail} = props;
+
   return (
     <>
       <Typography
@@ -24,6 +28,7 @@ const LoginPage = () => {
         label="Email"
         variant="outlined"
         placeholder="Enter your email"
+        onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
         type="password"
@@ -32,8 +37,10 @@ const LoginPage = () => {
         label="Password"
         variant="outlined"
         placeholder="Enter your password"
+        onChange={(e) => setPassword(e.target.value)}
       />
       <Button
+        type="submit"
         sx={{fontFamily: 'Poppins', marginTop: 2, marginBottom: 2, width: '60%'}}
         variant="contained"
       >

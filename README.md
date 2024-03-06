@@ -4,8 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 <br/>
 Mockups [Figma](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa2tBdExCRXAwNGFsQTdWaDF2ZXZtcWkwVVBwZ3xBQ3Jtc0ttdU4teE9MNnhRRFhhdHZjb2huaHJjWnpPWmJ6UG5kN3dmeGJmbkhldU4zVTU5dDYtTi1ueXJxSlJ0LWdPcjhkb3BoTmhEQlluYm1MU0JYdWpFNnBzYnJSVzNFbnJvNE9kdld6aktLQWM1dUJxblBXWQ&q=https%3A%2F%2Fwww.figma.com%2Ffile%2FyurQlM9Xp48X6SDDDKqJ7t%2FE-Commerce-Dashboard-%28Community%29%3Fnode-id%3D0%253A1%26t%3DLKjFuIi5ra3DbWQG-0&v=gVM_A5IkQ6A).
 <br/>
-Backend [Repository](https://github.com/dadi2015/lesson_nestjs).
-
+Backend [Repository](https://github.com/dadi2015/lesson_nestjs) | [Swagger UI](http://localhost:5000/api).
 ## Available Scripts
 
 In the project directory, you can run:

@@ -1,6 +1,10 @@
+import {FC} from "react";
 import {Button, TextField, Typography} from "@mui/material";
+import {IPropsRegister} from "../../../common/types/auth";
 
-const RegisterPage = () => {
+const RegisterPage:FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
+  const {setEmail, setPassword, setRepeatPassword, setFirstName, setUsername} = props;
+
   return (
     <>
       <Typography
@@ -24,6 +28,7 @@ const RegisterPage = () => {
         label="Name"
         variant="outlined"
         placeholder="Enter your name"
+        onChange={(e) => setFirstName(e.target.value)}
       />
       <TextField
         fullWidth={true}
@@ -31,6 +36,7 @@ const RegisterPage = () => {
         label="Username"
         variant="outlined"
         placeholder="Enter your username"
+        onChange={(e) => setUsername(e.target.value)}
       />
       <TextField
         fullWidth={true}
@@ -38,6 +44,7 @@ const RegisterPage = () => {
         label="Email"
         variant="outlined"
         placeholder="Enter your email"
+        onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
         type="password"
@@ -46,6 +53,7 @@ const RegisterPage = () => {
         label="Password"
         variant="outlined"
         placeholder="Enter your password"
+        onChange={(e) => setPassword(e.target.value)}
       />
       <TextField
         type="password"
@@ -54,8 +62,10 @@ const RegisterPage = () => {
         label="Confirm Password"
         variant="outlined"
         placeholder="Confirm your password"
+        onChange={(e) => setRepeatPassword(e.target.value)}
       />
       <Button
+        type="submit"
         sx={{fontFamily: 'Poppins', marginTop: 2, marginBottom: 2, width: '60%'}}
         variant="contained"
       >
