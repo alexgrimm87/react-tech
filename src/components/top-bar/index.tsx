@@ -1,48 +1,66 @@
 import {useContext} from "react";
-import {Box, Grid, IconButton, InputBase, useTheme} from "@mui/material";
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import SearchIcon from '@mui/icons-material/Search';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import {AppBar, Box, Grid, IconButton, InputBase, Toolbar, Typography, useTheme} from "@mui/material";
+import {LightMode, DarkMode, Search, NotificationsNone, MenuOutlined} from '@mui/icons-material';
 import {ColorModeContext, tokens} from "../../theme";
-import {useAppSelector} from "../../utils/hook";
+//import {useAppSelector} from "../../utils/hook";
 
-const TopBarComponent = () => {
-  const {user} = useAppSelector(state => state.auth.user);
+const TopBarComponent = (props: any) => {
+  //const {user} = useAppSelector((state) => state.auth.user)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode: any = useContext(ColorModeContext);
+  const {isOpen, setIsOpen} = props;
 
   return (
-    <Box display='flex' justifyContent='space-between' px='32px' py='24px'>
-      <Grid>{user && `Welcome ${user.firstName}`}</Grid>
-      <Box display='flex'>
-        <Grid
-          onClick={colorMode.toggleColorMode}
-          sx={{pr: '37px', borderRight: `1px solid ${colors.borderColor}`}}
-        >
-          <IconButton sx={{mr: '45px'}}>
-            {theme.palette.mode === 'dark' ? (<DarkModeIcon />) : (<LightModeIcon />)}
-          </IconButton>
-          <IconButton>
-            <NotificationsNoneIcon />
-          </IconButton>
-        </Grid>
-        <Grid
-          sx={{
-            display: 'flex',
-            backgroundColor: `${colors.primary[600]}`,
-            borderRadius: '8px',
-            ml: '28px'
-          }}
-        >
-          <IconButton sx={{ '&:hover': { background: 'transparent' } }}>
-            <SearchIcon />
-          </IconButton>
-          <InputBase sx={{px: '18px', py: '12px'}} placeholder='Search' />
-        </Grid>
-      </Box>
-    </Box>
+    <AppBar
+      position='static'
+      sx={{
+        background: `${colors.primary.DEFAULT} !important`,
+        borderBottom: `1px solid ${colors.borderColor}`,
+        boxShadow: 'none !important'
+      }}
+    >
+      <Toolbar sx={{justifyContent: 'space-between', padding: '25px 45px'}}>
+        <Box sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
+          <MenuOutlined sx={{marginRight: '10px', cursor: 'pointer'}} onClick={() => setIsOpen(!isOpen)} />
+          <Typography variant='h3'>
+            Welcome Alex
+            {/*{user && `Welcome ${user.firstName}`}*/}
+          </Typography>
+        </Box>
+        <Box display='flex'>
+          <Grid
+            onClick={colorMode.toggleColorMode}
+            sx={{
+              pr: '35px',
+              paddingTop: '10px',
+              borderRight: `1px solid ${colors.borderColor}`
+            }}
+          >
+            <IconButton sx={{mr: '45px'}}>
+              {theme.palette.mode === 'dark' ? (<DarkMode />) : (<LightMode />)}
+            </IconButton>
+            <IconButton>
+              <NotificationsNone />
+            </IconButton>
+          </Grid>
+          <Grid
+            sx={{
+              display: 'flex',
+              maxHeight: '45px',
+              backgroundColor: `${colors.primary[600]}`,
+              borderRadius: '8px',
+              ml: '28px'
+            }}
+          >
+            <IconButton sx={{'&:hover': {background: 'transparent'}}}>
+              <Search />
+            </IconButton>
+            <InputBase sx={{px: '18px', py: '12px'}} placeholder='Search' />
+          </Grid>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 

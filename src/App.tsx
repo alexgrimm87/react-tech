@@ -5,6 +5,9 @@ import PrivateRoute from "./utils/router/privateRoute";
 import LayoutComponent from "./components/layout";
 import AuthRootComponent from "./components/auth";
 import Home from "./components/home";
+import WatchlistComponent from "./components/watchlist";
+import NewsComponent from "./components/news";
+import SettingsComponent from "./components/settings";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -13,17 +16,20 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <LayoutComponent>
-          <div className="app">
-            <Routes>
+        <div className="app">
+          <Routes>
+            <Route element={<LayoutComponent />}>
               <Route element={<PrivateRoute />}>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home/>}/>
+                <Route path="/watchlist" element={<WatchlistComponent />} />
+                <Route path="/news" element={<NewsComponent />} />
+                <Route path="/settings" element={<SettingsComponent/>} />
               </Route>
               <Route path="login" element={<AuthRootComponent />} />
               <Route path="register" element={<AuthRootComponent />} />
-            </Routes>
-          </div>
-        </LayoutComponent>
+            </Route>
+          </Routes>
+        </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

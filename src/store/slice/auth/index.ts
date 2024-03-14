@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
-//import {IAuthState} from "../../../common/types/auth";
+import {IAuthState} from "../../../common/types/auth";
 
-const initialState: any = {
+const initialState: IAuthState = {
   //user: {},
   user: {
     id: null,
