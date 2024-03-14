@@ -3,7 +3,7 @@ import {Button, TextField, Typography} from "@mui/material";
 import {IPropsLogin} from "../../../common/types/auth";
 
 const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
-  const {setPassword, setEmail, navigate} = props;
+  const {navigate, register, errors} = props;
 
   return (
     <>
@@ -23,21 +23,32 @@ const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         Enter your login and password
       </Typography>
       <TextField
+        error={!!errors.email} //errors.email ? true : false
         fullWidth={true}
         margin="normal"
         label="Email"
         variant="outlined"
         placeholder="Enter your email"
-        onChange={(e) => setEmail(e.target.value)}
+        helperText={errors.email ? `${errors.email.message}` : ''}
+        {...register('email', {
+          required: 'Required field',
+          pattern:
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        })}
       />
       <TextField
+        error={!!errors.password} //errors.password ? true : false
         type="password"
         fullWidth={true}
         margin="normal"
         label="Password"
         variant="outlined"
         placeholder="Enter your password"
-        onChange={(e) => setPassword(e.target.value)}
+        helperText={errors.password ? `${errors.password.message}` : ''}
+        {...register('password', {
+          required: 'Required field',
+          minLength: 6
+        })}
       />
       <Button
         type="submit"

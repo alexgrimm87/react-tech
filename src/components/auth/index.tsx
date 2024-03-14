@@ -1,5 +1,6 @@
 import {FC, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import {useForm} from "react-hook-form";
 import {Box} from "@mui/material";
 import {instance} from "../../utils/axios";
 import {useAppDispatch} from "../../utils/hook";
@@ -18,15 +19,23 @@ const AuthRootComponent: FC = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const {
+    register,
+    formState: {
+      errors
+    },
+    handleSubmit
+  } = useForm();
 
-  const handleSubmit = async (e: {preventDefault: () => void}) => {
-    e.preventDefault();
+  console.log('Errors', errors)
+  const handleSubmitForm = async (data: any) => {
+    console.log('Data', data)
 
     if (location.pathname === '/login') {
       try {
         const userData = {
-          email,
-          password
+          email: data.email,
+          password: data.password
         }
 
         const user = await instance.post('auth/login', userData);
@@ -59,7 +68,7 @@ const AuthRootComponent: FC = (): JSX.Element => {
 
   return(
     <div className="root">
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
         <Box
           display="flex"
           justifyContent="center"
@@ -74,9 +83,9 @@ const AuthRootComponent: FC = (): JSX.Element => {
           {
             location.pathname === '/login'
               ? <LoginPage
-                setEmail={setEmail}
-                setPassword={setPassword}
                 navigate={navigate}
+                register={register}
+                errors={errors}
               /> : location.pathname === '/register'
                   ? <RegisterPage
                       setEmail={setEmail}
