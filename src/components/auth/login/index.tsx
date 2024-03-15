@@ -30,11 +30,7 @@ const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         variant="outlined"
         placeholder="Enter your email"
         helperText={errors.email ? `${errors.email.message}` : ''}
-        {...register('email', {
-          required: 'Required field',
-          pattern:
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        })}
+        {...register('email')}
       />
       <TextField
         error={!!errors.password} //errors.password ? true : false
@@ -45,10 +41,7 @@ const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         variant="outlined"
         placeholder="Enter your password"
         helperText={errors.password ? `${errors.password.message}` : ''}
-        {...register('password', {
-          required: 'Required field',
-          minLength: 6
-        })}
+        {...register('password')}
       />
       <Button
         type="submit"

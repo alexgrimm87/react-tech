@@ -3,7 +3,7 @@ import {Button, TextField, Typography} from "@mui/material";
 import {IPropsRegister} from "../../../common/types/auth";
 
 const RegisterPage:FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
-  const {setEmail, setPassword, setRepeatPassword, setFirstName, setUsername, navigate} = props;
+  const {navigate, register, errors} = props;
 
   return (
     <>
@@ -23,46 +23,56 @@ const RegisterPage:FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => 
         Enter your registration details
       </Typography>
       <TextField
+        error={!!errors.name}
         fullWidth={true}
         margin="normal"
         label="Name"
         variant="outlined"
         placeholder="Enter your name"
-        onChange={(e) => setFirstName(e.target.value)}
+        helperText={errors.name ? `${errors.name.message}` : ''}
+        {...register('name')}
       />
       <TextField
+        error={!!errors.username}
         fullWidth={true}
         margin="normal"
         label="Username"
         variant="outlined"
         placeholder="Enter your username"
-        onChange={(e) => setUsername(e.target.value)}
+        helperText={errors.username ? `${errors.username.message}` : ''}
+        {...register('username')}
       />
       <TextField
+        error={!!errors.email}
         fullWidth={true}
         margin="normal"
         label="Email"
         variant="outlined"
         placeholder="Enter your email"
-        onChange={(e) => setEmail(e.target.value)}
+        helperText={errors.email ? `${errors.email.message}` : ''}
+        {...register('email')}
       />
       <TextField
+        error={!!errors.password}
         type="password"
         fullWidth={true}
         margin="normal"
         label="Password"
         variant="outlined"
         placeholder="Enter your password"
-        onChange={(e) => setPassword(e.target.value)}
+        helperText={errors.password ? `${errors.password.message}` : ''}
+        {...register('password')}
       />
       <TextField
+        error={!!errors.confirmPassword}
         type="password"
         fullWidth={true}
         margin="normal"
         label="Confirm Password"
         variant="outlined"
         placeholder="Confirm your password"
-        onChange={(e) => setRepeatPassword(e.target.value)}
+        helperText={errors.confirmPassword ? `${errors.confirmPassword.message}` : ''}
+        {...register('confirmPassword')}
       />
       <Button
         type="submit"
