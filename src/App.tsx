@@ -3,11 +3,11 @@ import {CssBaseline, ThemeProvider} from '@mui/material';
 import {ColorModeContext, useMode} from './theme';
 import PrivateRoute from "./utils/router/privateRoute";
 import LayoutComponent from "./components/layout";
-import AuthRootComponent from "./components/auth";
-import Home from "./components/home";
-import WatchlistComponent from "./components/watchlist";
-import NewsComponent from "./components/news";
-import SettingsComponent from "./components/settings";
+import AuthRootComponent from "./pages/auth";
+import Home from "./pages/home";
+import WatchlistComponent from "./pages/watchlist";
+import NewsComponent from "./pages/news";
+import SettingsComponent from "./pages/settings";
 
 function App() {
   const [theme, colorMode] = useMode();

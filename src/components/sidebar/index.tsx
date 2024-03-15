@@ -1,9 +1,8 @@
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {
   Box,
   Drawer,
-  Divider,
   IconButton,
   List,
   ListItem,
@@ -16,14 +15,14 @@ import {
 
 import {
   ChevronLeftOutlined,
-  ChevronRightOutlined,
   LogoutOutlined
 } from '@mui/icons-material';
 import {navMenu} from "../../common/moks/navigate";
 import {tokens} from "../../theme";
+import {ISidebarProps} from "../../common/types/sidebar";
 import Logo from "../../assets/images/sidebar/logo.svg"
 
-const SidebarComponent = (props: any) => {
+const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
   const [active, setActive] = useState('');
   const {isNonMobile, drawerWidth, isOpen, setIsOpen} = props;
   const {pathname} = useLocation();
@@ -32,7 +31,7 @@ const SidebarComponent = (props: any) => {
   const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
-    setActive(pathname.substring(1));
+    setActive(pathname);
   }, [pathname]);
 
   const renderNavMenu = navMenu.map((element): JSX.Element => {
@@ -40,6 +39,7 @@ const SidebarComponent = (props: any) => {
       <ListItem key={element.id}>
         <ListItemButton
           onClick={() => navigate(`${element.path}`)}
+          className={active === element.path ? 'active' : ''}
           sx={{
             '&:hover': {
               backgroundColor: '#1900D5 !important',
@@ -49,6 +49,11 @@ const SidebarComponent = (props: any) => {
                 color: `${colors.white.DEFAULT} !important`
               }
             },
+            '&.active': {
+              backgroundColor: '#1900D5 !important',
+              color: '#fff !important',
+              borderRadius: '4px !important'
+            }
           }}
         >
           <ListItemIcon>{element.icon}</ListItemIcon>

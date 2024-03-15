@@ -10,7 +10,6 @@ import {AppErrors} from "../../common/errors";
 import {LoginSchema, RegisterSchema} from "../../utils/yup";
 import LoginPage from "./login";
 import RegisterPage from "./register";
-import './style.scss';
 
 const AuthRootComponent: FC = (): JSX.Element => {
   const location = useLocation();
@@ -63,8 +62,15 @@ const AuthRootComponent: FC = (): JSX.Element => {
   }
 
   return(
-    <div className="root">
-      <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100vw',
+      height: '100vh',
+      padding: '20px'
+    }}>
+      <form style={{flex: '1'}} onSubmit={handleSubmit(handleSubmitForm)}>
         <Box
           display="flex"
           justifyContent="center"
@@ -74,7 +80,7 @@ const AuthRootComponent: FC = (): JSX.Element => {
           margin="auto"
           padding={5}
           borderRadius={5}
-          boxShadow={'5px 5px 10px #ccc'}
+          boxShadow={'-3px -2px 20px 1px #202020'}
         >
           {
             location.pathname === '/login'

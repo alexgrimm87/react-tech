@@ -1,10 +1,11 @@
-import {useContext} from "react";
+import {FC, useContext} from "react";
 import {AppBar, Box, Grid, IconButton, InputBase, Toolbar, Typography, useTheme} from "@mui/material";
 import {LightMode, DarkMode, Search, NotificationsNone, MenuOutlined} from '@mui/icons-material';
 import {ColorModeContext, tokens} from "../../theme";
+import {ITopBarProps} from "../../common/types/top-bar";
 //import {useAppSelector} from "../../utils/hook";
 
-const TopBarComponent = (props: any) => {
+const TopBarComponent:FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
   //const {user} = useAppSelector((state) => state.auth.user)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
