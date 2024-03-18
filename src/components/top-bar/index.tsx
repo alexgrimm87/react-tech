@@ -3,7 +3,6 @@ import {AppBar, Box, Grid, IconButton, InputBase, Toolbar, Typography, useTheme}
 import {LightMode, DarkMode, Search, NotificationsNone, MenuOutlined} from '@mui/icons-material';
 import {ColorModeContext, tokens} from "../../theme";
 import {ITopBarProps} from "../../common/types/top-bar";
-//import {useAppSelector} from "../../utils/hook";
 
 const TopBarComponent:FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
   //const {user} = useAppSelector((state) => state.auth.user)
@@ -24,10 +23,7 @@ const TopBarComponent:FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
       <Toolbar sx={{justifyContent: 'space-between', padding: '25px 45px'}}>
         <Box sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <MenuOutlined sx={{marginRight: '10px', cursor: 'pointer'}} onClick={() => setIsOpen(!isOpen)} />
-          <Typography variant='h3'>
-            Welcome Alex
-            {/*{user && `Welcome ${user.firstName}`}*/}
-          </Typography>
+          <Typography variant='h3'>Welcome {sessionStorage.getItem('name')}</Typography>
         </Box>
         <Box display='flex'>
           <Grid

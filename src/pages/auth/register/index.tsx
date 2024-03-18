@@ -1,10 +1,10 @@
 import {FC} from "react";
 import {Box, TextField, Typography} from "@mui/material";
 import {IPropsRegister} from "../../../common/types/auth";
-import AppButton from "../../../components/app-button";
+import AppLoadingButton from "../../../components/loading-button";
 
 const RegisterPage:FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
-  const {navigate, register, errors} = props;
+  const {navigate, register, errors, loading} = props;
 
   return (
     <>
@@ -75,13 +75,14 @@ const RegisterPage:FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => 
           {...register('confirmPassword')}
         />
       </Box>
-      <AppButton
+      <AppLoadingButton
+        loading={loading}
         type="submit"
-        sx={{fontFamily: 'Poppins', width: '60%'}}
+        sx={{width: '60%'}}
         variant="contained"
       >
         Sign up
-      </AppButton>
+      </AppLoadingButton>
       <Box margin='20px 0'>
         <Typography
           variant="body1"

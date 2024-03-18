@@ -1,10 +1,10 @@
 import {FC} from "react";
 import {Box, TextField, Typography} from "@mui/material";
 import {IPropsLogin} from "../../../common/types/auth";
-import AppButton from "../../../components/app-button";
+import AppLoadingButton from "../../../components/loading-button";
 
 const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
-  const {navigate, register, errors} = props;
+  const {navigate, register, loading, errors} = props;
 
   return (
     <>
@@ -45,13 +45,14 @@ const LoginPage:FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
           {...register('password')}
         />
       </Box>
-      <AppButton
+      <AppLoadingButton
+        loading={loading}
         type="submit"
-        sx={{fontFamily: 'Poppins', width: '60%'}}
+        sx={{width: '60%'}}
         variant="contained"
       >
         Sign in
-      </AppButton>
+      </AppLoadingButton>
       <Box margin='20px 0'>
         <Typography variant="body1">
           You don't have an account? <span
