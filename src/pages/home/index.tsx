@@ -1,16 +1,18 @@
 import {FC, useCallback, useEffect, useMemo, useRef} from "react";
-import {Box, Grid, useTheme} from "@mui/material";
+import {Box, Grid, Typography, useTheme} from "@mui/material";
 import {tokens} from "../../theme";
 import {useAppDispatch, useAppSelector} from "../../utils/hook";
-import {getFavoriteAssets} from "../../store/thunks/assets";
+import {getFavoriteAssets, getTopPriceData} from "../../store/thunks/assets";
 import {IChartData, ISingleAsset} from "../../common/types/assets";
 import AreaChart from "../../components/charts/area-chart";
 import LineChart from "../../components/charts/line-chart";
+import TopPriceComponent from "../../components/top-price";
 import TrendUp from '../../assets/images/chart/trend-up.svg';
 import TrendDown from '../../assets/images/chart/trend-down.svg';
 
 const Home: FC = (): JSX.Element => {
-  const favoriteAssets: IChartData[] = useAppSelector(state => state.assets.favoriteAssets);
+  const favoriteAssets: IChartData[] = useAppSelector((state) => state.assets.favoriteAssets);
+  const assetsArray: ISingleAsset[] = useAppSelector((state) => state.assets.assets);
   const dispatch = useAppDispatch();
   const fetchDataRef = useRef(false);
   const theme = useTheme();
@@ -25,6 +27,10 @@ const Home: FC = (): JSX.Element => {
     )
   }, [favoriteAssets]);
 
+  const filteredAssetArray = assetsArray
+    .slice() //array copy
+    .sort((a, b) => b.current_price - a.current_price);
+
   const fetchData = useCallback((data: string[]) => {
     data.forEach((element: string) => {
       dispatch(getFavoriteAssets(element));
@@ -35,7 +41,8 @@ const Home: FC = (): JSX.Element => {
     if (fetchDataRef.current) return
     fetchDataRef.current = true;
     fetchData(favoriteAssetName);
-  }, [favoriteAssetName, fetchData]);
+    dispatch(getTopPriceData());
+  }, [favoriteAssetName, fetchData, dispatch])
 
   const renderFavoriteBlock = filteredArray.map((element: IChartData) => {
     let currentPrice = 0;
@@ -89,14 +96,14 @@ const Home: FC = (): JSX.Element => {
                     borderRadius: '4px'
                   },
                   changePrice > 0
-                  ? {
-                      backgroundColor: '#A9FFA7',
-                      color: '#037400'
-                    }
-                  : {
-                      backgroundColor: '#FFA7A7',
-                      color: '#740000'
-                    }
+                    ? {
+                        backgroundColor: '#A9FFA7',
+                        color: '#037400'
+                      }
+                    : {
+                        backgroundColor: '#FFA7A7',
+                        color: '#740000'
+                      }
                 ]}
               >
                 {changePrice > 0 ? (
@@ -104,7 +111,7 @@ const Home: FC = (): JSX.Element => {
                 ) : (
                   <img src={TrendDown} alt="TrendDown" />
                 )}
-                <span>{Number(changePrice).toFixed(2)}%</span>
+                <Typography variant="body1">{Number(changePrice).toFixed(2)}%</Typography>
               </Box>
             </div>
           </Grid>
@@ -128,12 +135,36 @@ const Home: FC = (): JSX.Element => {
             : colors.primary[600]
         }`,
         padding: '20px 16px',
+        marginBottom: '32px',
         minHeight: 270,
         border: `1px solid ${colors.borderColor}`,
         borderRadius: '12px'
       }}>
         <Grid item xs={12} sm={12} lg={12}>
           {filteredArray.length && <LineChart data={filteredArray} />}
+        </Grid>
+      </Grid>
+      <Grid container sx={{
+        backgroundColor: `${
+          theme.palette.mode === 'light'
+            ? colors.primary.DEFAULT
+            : colors.primary[600]
+        }`,
+        padding: '20px 16px',
+        marginBottom: '32px',
+        minHeight: 270,
+        border: `1px solid ${colors.borderColor}`,
+        borderRadius: '12px',
+        '& .MuiPaper-root': {
+          backgroundColor: 'transparent !important',
+          boxShadow: 'none !important',
+          backgroundImage: 'none !important'
+        }
+      }}>
+        <Grid item xs={12} sm={12} lg={12}>
+          {filteredAssetArray.length && (
+            <TopPriceComponent assets={filteredAssetArray.slice(0, 6)} />
+          )}
         </Grid>
       </Grid>
     </Box>
