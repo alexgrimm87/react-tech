@@ -1,15 +1,15 @@
-import {FC, useContext} from "react";
-import {AppBar, Box, Grid, IconButton, InputBase, Toolbar, Typography, useTheme} from "@mui/material";
-import {LightMode, DarkMode, Search, NotificationsNone, MenuOutlined} from '@mui/icons-material';
-import {ColorModeContext, tokens} from "../../theme";
+import {FC} from "react";
+import {AppBar, Box, Grid, Toolbar, Typography, useTheme} from "@mui/material";
+import {MenuOutlined} from '@mui/icons-material';
 import {ITopBarProps} from "../../common/types/top-bar";
+import {tokens} from "../../theme";
+import ThemeSwitcherComponent from "../theme-switcher";
+import SearchBarComponent from "../search-bar";
 
 const TopBarComponent:FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
-  //const {user} = useAppSelector((state) => state.auth.user)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const colorMode: any = useContext(ColorModeContext);
-  const {isOpen, setIsOpen} = props;
+  const {isOpen, setIsOpen, isNonMobile} = props;
 
   return (
     <AppBar
@@ -21,41 +21,20 @@ const TopBarComponent:FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
       }}
     >
       <Toolbar sx={{justifyContent: 'space-between', padding: '25px 45px'}}>
-        <Box sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-          <MenuOutlined sx={{marginRight: '10px', cursor: 'pointer'}} onClick={() => setIsOpen(!isOpen)} />
-          <Typography variant='h3'>Welcome {sessionStorage.getItem('name')}</Typography>
-        </Box>
-        <Box display='flex'>
-          <Grid
-            onClick={colorMode.toggleColorMode}
-            sx={{
-              pr: '35px',
-              paddingTop: '10px',
-              borderRight: `1px solid ${colors.borderColor}`
-            }}
-          >
-            <IconButton sx={{mr: '45px'}}>
-              {theme.palette.mode === 'dark' ? (<DarkMode />) : (<LightMode />)}
-            </IconButton>
-            <IconButton>
-              <NotificationsNone />
-            </IconButton>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid item sm={3} lg={3}>
+            <Box sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
+              <MenuOutlined sx={{marginRight: '10px', cursor: 'pointer'}} onClick={() => setIsOpen(!isOpen)} />
+              <Typography variant='h3'>Welcome {sessionStorage.getItem('name')}</Typography>
+            </Box>
           </Grid>
-          <Grid
-            sx={{
-              display: 'flex',
-              maxHeight: '45px',
-              backgroundColor: `${colors.primary[600]}`,
-              borderRadius: '8px',
-              ml: '28px'
-            }}
-          >
-            <IconButton sx={{'&:hover': {background: 'transparent'}}}>
-              <Search />
-            </IconButton>
-            <InputBase sx={{px: '18px', py: '12px'}} placeholder='Search' />
-          </Grid>
-        </Box>
+          {isNonMobile && (
+            <Grid display="flex" justifyContent="flex-end" item sm={9} lg={9}>
+              <ThemeSwitcherComponent />
+              <SearchBarComponent />
+            </Grid>
+          )}
+        </Grid>
       </Toolbar>
     </AppBar>
   );

@@ -12,13 +12,11 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
-
-import {
-  ChevronLeftOutlined,
-  LogoutOutlined
-} from '@mui/icons-material';
+import {ChevronLeftOutlined, LogoutOutlined} from '@mui/icons-material';
 import {navMenu} from "../../common/moks/navigate";
 import {tokens} from "../../theme";
+import ThemeSwitcher from "../theme-switcher";
+import SearchBarComponent from "../search-bar";
 import {ISidebarProps} from "../../common/types/sidebar";
 import Logo from "../../assets/images/sidebar/logo.svg"
 
@@ -110,12 +108,26 @@ const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element 
                 )}
               </Box>
             </Box>
+            <List>
+              {!isNonMobile && (
+                <ListItem>
+                  <SearchBarComponent />
+                </ListItem>
+              )}
+            </List>
             <List sx={{marginBottom: '55px'}}>
               {renderNavMenu}
             </List>
           </Box>
           <Box width='100%'>
             <List>
+              {!isNonMobile && (
+                <ListItem>
+                  <Box padding="5px">
+                    <ThemeSwitcher />
+                  </Box>
+                </ListItem>
+              )}
               <ListItem>
                 <ListItemButton
                   sx={{
