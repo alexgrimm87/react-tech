@@ -1,4 +1,4 @@
-const WatchlistComponent = () => {
+const WatchlistPage = () => {
   return (
     <div>
       <h1>Watchlist Page</h1>
@@ -6,4 +6,4 @@ const WatchlistComponent = () => {
   );
 };
 
-export default WatchlistComponent;
+export default WatchlistPage;

@@ -10,7 +10,7 @@ import {LoginSchema, RegisterSchema} from "../../utils/yup";
 import LoginPage from "./login";
 import RegisterPage from "./register";
 
-const AuthRootComponent: FC = (): JSX.Element => {
+const AuthRootPage: FC = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -96,4 +96,4 @@ const AuthRootComponent: FC = (): JSX.Element => {
   )
 };
 
-export default AuthRootComponent;
+export default AuthRootPage;

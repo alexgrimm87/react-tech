@@ -1,4 +1,4 @@
-const NewsComponent = () => {
+const NewsPage = () => {
   return (
     <div>
       <h1>News Page</h1>
@@ -6,4 +6,4 @@ const NewsComponent = () => {
   );
 };
 
-export default NewsComponent;
+export default NewsPage;

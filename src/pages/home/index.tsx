@@ -10,7 +10,7 @@ import TopPriceComponent from "../../components/top-price";
 import TrendUp from '../../assets/images/chart/trend-up.svg';
 import TrendDown from '../../assets/images/chart/trend-down.svg';
 
-const Home: FC = (): JSX.Element => {
+const HomePage: FC = (): JSX.Element => {
   const favoriteAssets: IChartData[] = useAppSelector((state) => state.assets.favoriteAssets);
   const assetsArray: ISingleAsset[] = useAppSelector((state) => state.assets.assets);
   const dispatch = useAppDispatch();
@@ -171,4 +171,4 @@ const Home: FC = (): JSX.Element => {
   );
 };
 
-export default Home;
+export default HomePage;
