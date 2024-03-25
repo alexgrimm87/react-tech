@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {AppBar, Box, Grid, Toolbar, Typography, useTheme} from "@mui/material";
+import {AppBar, Grid, Toolbar, Typography, useTheme} from "@mui/material";
 import {MenuOutlined} from '@mui/icons-material';
 import {ITopBarProps} from "../../common/types/top-bar";
 import {tokens} from "../../theme";
