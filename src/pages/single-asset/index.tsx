@@ -1,6 +1,6 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
-import {Avatar, Grid, Typography} from "@mui/material";
+import {Alert, AlertColor, Avatar, Grid, Snackbar, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../utils/hook";
 import {createWatchListRecord} from "../../store/thunks/assets";
 import {ISingleAsset} from "../../common/types/assets";
@@ -11,6 +11,8 @@ import Card from "../../components/card";
 import CardButton from "../../components/card-button";
 
 const SingleAssetPage: FC = (): JSX.Element => {
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState<AlertColor>('success');
   const navigate = useNavigate();
   const {id} = useParams();
   const dispatch = useAppDispatch();
@@ -18,17 +20,30 @@ const SingleAssetPage: FC = (): JSX.Element => {
   const asset = assetsArray.find((element) => element.name === id as string);
 
   const handleCreateRecord = () => {
-    const data = {
-      name: '',
-      assetId: ''
-    }
+    try {
+      const data = {
+        name: '',
+        assetId: ''
+      }
 
-    if (asset) {
-      data.name = asset.name;
-      data.assetId = asset.id;
-    }
+      if (asset) {
+        data.name = asset.name;
+        data.assetId = asset.id;
+      }
 
-    dispatch(createWatchListRecord(data));
+      dispatch(createWatchListRecord(data));
+      setSeverity('success');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      }, 2000);
+    } catch (e) {
+      setSeverity('error');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      }, 2000);
+    }
   }
 
   return (
@@ -96,6 +111,9 @@ const SingleAssetPage: FC = (): JSX.Element => {
               Add to favourites
             </CardButton>
           </Grid>
+          <Snackbar open={open} autoHideDuration={6000}>
+            <Alert severity={severity} sx={{width: '100%'}}>Success!</Alert>
+          </Snackbar>
         </Grid>
       )}
     </>
