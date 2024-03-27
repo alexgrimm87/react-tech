@@ -6,6 +6,8 @@ import {tabProps} from "../../utils/helpers";
 import {getPublicUser} from "../../store/thunks/auth";
 import TabPanel from "../../components/tab-panel";
 import SettingsPersonalInfoComponent from "../../components/settings-personal-info";
+import ChangePasswordComponent from "../../components/change-password";
+import DeleteUserComponent from "../../components/delete-user";
 
 const SettingsPage = () => {
   const [value, setValue] = useState(0);
@@ -45,10 +47,10 @@ const SettingsPage = () => {
         <SettingsPersonalInfoComponent />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Change password
+        <ChangePasswordComponent />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Remove account
+        <DeleteUserComponent />
       </TabPanel>
     </Grid>
   );

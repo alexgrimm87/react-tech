@@ -5,7 +5,7 @@ import TopBarComponent from "../top-bar";
 import SidebarComponent from "../sidebar";
 
 const LayoutComponent: FC = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
   const isNonMobile = useMediaQuery('(min-width:760px)');
 
