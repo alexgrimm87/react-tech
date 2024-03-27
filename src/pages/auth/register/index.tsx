@@ -3,7 +3,7 @@ import {Box, TextField, Typography} from "@mui/material";
 import {IPropsRegister} from "../../../common/types/auth";
 import AppLoadingButton from "../../../components/loading-button";
 
-const RegisterPage:FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
+const RegisterPage:FC<IPropsRegister> = (props: IPropsRegister) => {
   const {navigate, register, errors, loading} = props;
 
   return (

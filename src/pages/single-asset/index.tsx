@@ -10,8 +10,9 @@ import CardTitle from "../../components/card-title";
 import Card from "../../components/card";
 import CardButton from "../../components/card-button";
 
-const SingleAssetPage: FC = (): JSX.Element => {
+const SingleAssetPage: FC = () => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
   const [severity, setSeverity] = useState<AlertColor>('success');
   const navigate = useNavigate();
   const {id} = useParams();
@@ -32,12 +33,14 @@ const SingleAssetPage: FC = (): JSX.Element => {
       }
 
       dispatch(createWatchListRecord(data));
+      setError(false);
       setSeverity('success');
       setOpen(true);
       setTimeout(() => {
         setOpen(false);
       }, 2000);
     } catch (e) {
+      setError(true);
       setSeverity('error');
       setOpen(true);
       setTimeout(() => {
@@ -57,7 +60,9 @@ const SingleAssetPage: FC = (): JSX.Element => {
             <CardItem>
               <FlexBetween>
                 <Avatar src={asset.image} sx={{marginRight: 2}} />
-                <Typography variant="h2" sx={{fontSize: 20, fontWeight: 600}}>{asset.symbol.toUpperCase()}</Typography>
+                <Typography variant="h2" sx={{fontSize: 20, fontWeight: 600}}>
+                  {asset.symbol.toUpperCase()}
+                </Typography>
               </FlexBetween>
             </CardItem>
           </Card>
@@ -65,7 +70,9 @@ const SingleAssetPage: FC = (): JSX.Element => {
             <CardItem>
               <FlexBetween>
                 <CardTitle variant="h2">Price:&nbsp;</CardTitle>
-                <Typography variant="h2" sx={{fontSize: 20}}>$ {asset.current_price}</Typography>
+                <Typography variant="h2" sx={{fontSize: 20}}>
+                  $ {asset.current_price}
+                </Typography>
               </FlexBetween>
             </CardItem>
           </Card>
@@ -112,7 +119,9 @@ const SingleAssetPage: FC = (): JSX.Element => {
             </CardButton>
           </Grid>
           <Snackbar open={open} autoHideDuration={6000}>
-            <Alert severity={severity} sx={{width: '100%'}}>Success!</Alert>
+            <Alert severity={severity} sx={{width: '100%'}}>
+              {!error ? 'Success!' : 'Oops'}
+            </Alert>
           </Snackbar>
         </Grid>
       )}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {Box, Grid, Tab, Tabs, useTheme} from "@mui/material";
 import {tokens} from "../../theme";
 import {useAppDispatch} from "../../utils/hook";
@@ -9,7 +9,7 @@ import SettingsPersonalInfoComponent from "../../components/settings-personal-in
 import ChangePasswordComponent from "../../components/change-password";
 import DeleteUserComponent from "../../components/delete-user";
 
-const SettingsPage = () => {
+const SettingsPage: FC = () => {
   const [value, setValue] = useState(0);
   const dispatch = useAppDispatch();
   const theme = useTheme();

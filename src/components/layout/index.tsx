@@ -1,13 +1,20 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {Outlet, useLocation} from "react-router-dom";
 import {Box, useMediaQuery} from "@mui/material";
+import {useAppDispatch} from "../../utils/hook";
+import {getPublicUser} from "../../store/thunks/auth";
 import TopBarComponent from "../top-bar";
 import SidebarComponent from "../sidebar";
 
-const LayoutComponent: FC = (): JSX.Element => {
+const LayoutComponent: FC = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const isNonMobile = useMediaQuery('(min-width:760px)');
+
+  useEffect(() => {
+    dispatch(getPublicUser());
+  }, [dispatch]);
 
   return (
     location.pathname === '/login' || location.pathname === '/register'

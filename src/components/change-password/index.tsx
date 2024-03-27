@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {FC, useState} from "react";
 import {Box, Grid, useTheme} from "@mui/material";
 import {useAppDispatch} from "../../utils/hook";
 import {updateUserPassword} from "../../store/thunks/auth";
@@ -6,14 +6,14 @@ import {tokens} from "../../theme";
 import InputField from "../input-field";
 import AppLoadingButton from "../loading-button";
 
-const ChangePasswordComponent = () => {
+const ChangePasswordComponent: FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const handleChangePassword = (e: any) => {
+  const handleChangePassword = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const data = {

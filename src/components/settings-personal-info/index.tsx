@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {Box, Grid, useTheme} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../utils/hook";
-import {updateUserInfo} from "../../store/thunks/auth";
+import {getPublicUser, updateUserInfo} from "../../store/thunks/auth";
 import {tokens} from "../../theme";
 import InputField from "../input-field";
 import AppLoadingButton from "../loading-button";
 
-const SettingsPersonalInfoComponent = () => {
+const SettingsPersonalInfoComponent: FC = () => {
   const dispatch = useAppDispatch();
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
@@ -33,6 +33,7 @@ const SettingsPersonalInfoComponent = () => {
     }
 
     dispatch(updateUserInfo(data));
+    dispatch(getPublicUser());
   }
 
   return (

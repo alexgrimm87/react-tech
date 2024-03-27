@@ -20,7 +20,7 @@ import SearchBarComponent from "../search-bar";
 import {ISidebarProps} from "../../common/types/sidebar";
 import Logo from "../../assets/images/sidebar/logo.svg"
 
-const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
+const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps) => {
   const [active, setActive] = useState('');
   const {isNonMobile, drawerWidth, isOpen, setIsOpen} = props;
   const {pathname} = useLocation();
@@ -32,7 +32,7 @@ const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element 
     setActive(pathname);
   }, [pathname]);
 
-  const renderNavMenu = navMenu.map((element): JSX.Element => {
+  const renderNavMenu = navMenu.map((element) => {
     return (
       <ListItem key={element.id}>
         <ListItemButton

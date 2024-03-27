@@ -4,7 +4,7 @@ import {Stack, Autocomplete, TextField} from "@mui/material";
 import {useAppSelector} from "../../utils/hook";
 import {ISingleAsset} from "../../common/types/assets";
 
-const SearchBarComponent: FC = (): JSX.Element => {
+const SearchBarComponent: FC = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>('');
   const navigate = useNavigate();
   const assetsArray: ISingleAsset[] = useAppSelector((state) => state.assets.assets);

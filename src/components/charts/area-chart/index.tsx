@@ -1,3 +1,4 @@
+import {FC} from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,7 +26,7 @@ ChartJS.register(
   Legend
 );
 
-const AreaChart = (props: IAreaChartProps) => {
+const AreaChart: FC<IAreaChartProps> = (props: IAreaChartProps) => {
   const {data} = props;
 
   const options = {

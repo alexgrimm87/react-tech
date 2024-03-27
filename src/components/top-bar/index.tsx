@@ -1,16 +1,18 @@
 import {FC} from "react";
 import {AppBar, Grid, Toolbar, Typography, useTheme} from "@mui/material";
 import {MenuOutlined} from '@mui/icons-material';
+import {useAppSelector} from "../../utils/hook";
 import {ITopBarProps} from "../../common/types/top-bar";
 import {tokens} from "../../theme";
 import ThemeSwitcherComponent from "../theme-switcher";
 import SearchBarComponent from "../search-bar";
 import FlexBetween from "../flex-between";
 
-const TopBarComponent:FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
+const TopBarComponent:FC<ITopBarProps> = (props: ITopBarProps) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const {isOpen, setIsOpen, isNonMobile} = props;
+  const {user} = useAppSelector((state) => state.auth.user);
 
   return (
     <AppBar
@@ -26,7 +28,7 @@ const TopBarComponent:FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
           <Grid item sm={3} lg={3}>
             <FlexBetween>
               <MenuOutlined sx={{marginRight: '10px', cursor: 'pointer'}} onClick={() => setIsOpen(!isOpen)} />
-              <Typography variant='h3'>Welcome {sessionStorage.getItem('name')}</Typography>
+              <Typography variant='h3'>Welcome {user ? `${user.firstName}` : ''}</Typography>
             </FlexBetween>
           </Grid>
           {isNonMobile && (

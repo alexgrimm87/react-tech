@@ -1,10 +1,10 @@
-import {useEffect} from "react";
+import {FC, useEffect} from "react";
 import {Box, Grid, Typography, Link, useTheme} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../utils/hook";
 import {tokens} from "../../theme";
 import {getNews} from "../../store/thunks/news";
 
-const NewsPage = () => {
+const NewsPage: FC = () => {
   const dispatch = useAppDispatch();
   const {news} = useAppSelector((state) => state.news);
   const theme = useTheme();

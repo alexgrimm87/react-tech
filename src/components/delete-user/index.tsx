@@ -1,11 +1,11 @@
-import {useState} from "react";
+import {FC, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Button, Checkbox, FormControlLabel, FormGroup, Grid, Typography, useTheme} from "@mui/material";
 import {useAppDispatch} from "../../utils/hook";
 import {deleteUser} from "../../store/thunks/auth";
 import {tokens} from "../../theme";
 
-const DeleteUserComponent = () => {
+const DeleteUserComponent: FC = () => {
   const [checked, setChecked] = useState(false);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

@@ -10,7 +10,7 @@ import {LoginSchema, RegisterSchema} from "../../utils/yup";
 import LoginPage from "./login";
 import RegisterPage from "./register";
 
-const AuthRootPage: FC = (): JSX.Element => {
+const AuthRootPage: FC = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
