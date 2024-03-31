@@ -32,6 +32,12 @@ const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps) => {
     setActive(pathname);
   }, [pathname]);
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('name');
+    navigate('/login');
+  };
+
   const renderNavMenu = navMenu.map((element) => {
     return (
       <ListItem key={element.id}>
@@ -130,6 +136,7 @@ const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps) => {
               )}
               <ListItem>
                 <ListItemButton
+                  onClick={handleLogout}
                   sx={{
                   '&:hover': {
                     backgroundColor: '#1900D5 !important',
